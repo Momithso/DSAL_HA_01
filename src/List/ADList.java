@@ -67,4 +67,14 @@ public class ADList<K,D> {
         if (n == this.head) return null;
         return n;
     }
+
+    /**
+     * Prints this list
+     */
+    public void print() {
+        ListNode<K,D> n;
+        for (n = this.head.getSucc(); n.getKey() != null; n = n.getSucc()) {
+            System.out.println(n.getKey() + " : " + n.getData());
+        }
+    }
 }
