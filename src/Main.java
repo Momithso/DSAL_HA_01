@@ -115,10 +115,10 @@ public class Main {
             if (node != null) {
                 node.setData(node.getData()+1);
 
-                node.delete();
+                list.append(node.getKey(), node.getData());
                 operations++;
 
-                list.append(node.getKey(), node.getData());
+                node.delete();
                 operations++;
             } else {
                 list.append(s, 1);
