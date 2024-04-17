@@ -27,9 +27,9 @@ public class Main {
          * Reads files and adds them to ADLists
          */
         try {
+            data.add(new DataNode("beide", Files.readAllLines(pathBeide)));
             data.add(new DataNode("silber", Files.readAllLines(pathSilber)));
             data.add(new DataNode("winnetou", Files.readAllLines(pathWinnetou)));
-            data.add(new DataNode("beide", Files.readAllLines(pathBeide)));
         } catch (IOException e) {
             System.out.println("Files are missing or Path is not correctly set. Code will not work!");
         }

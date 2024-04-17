@@ -66,55 +66,43 @@ public class DataNode {
      * Naive algorithm and gives back the operations that were needed
      * @return Operations that were needed
      */
-    public long naiveWay() {
-        long operations = 0;
+    public int naiveWay() {
+        int operations = 0;
+        resNaive.resetCounter();
         ListNode<String,Integer> node;
-
         for (String s : this.list) {
             node = resNaive.findNode(s);
-
-            if (node == null) {
+            if (node != null) {
+                node.setData(node.getData() + 1);
+            } else {
                 resNaive.append(s, 1);
                 operations++;
-
-            } else {
-                node.setData(node.getData() + 1);
-                operations++;
-
             }
-            operations++;
         }
-        
-        return operations;
+        return operations + resNaive.getCounter();
     }
 
     /**
      * Move to Front algorithm and gives back the operations that were needed
      * @return Operations that were needed
      */
-    public long moveToFrontWay() {
-        long operations = 0;
+    public int moveToFrontWay() {
+        int operations = 0;
+        resMoveToFront.resetCounter();
         ListNode<String, Integer> node;
-
         for (String s : this.list) {
             node = resMoveToFront.findNode(s);
-
-            if (node == null) {
-                resMoveToFront.prepend(s, 1);
-                operations++;
-                
-            } else {
+            if (node != null) {
                 node.setData(node.getData()+1);
-
+                node.delete();
+                operations++;
                 resMoveToFront.prepend(node.getKey(), node.getData());
                 operations++;
-
-                resMoveToFront.delete(s);
+            } else {
+                resMoveToFront.prepend(s, 1);
                 operations++;
             }
-            operations++;
         }
-
-        return operations;
+        return operations + resMoveToFront.getCounter();
     }
 }

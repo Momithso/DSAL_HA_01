@@ -45,7 +45,7 @@ public class ListNode<K,D> {
     public void append(ListNode<K,D> newNode) {
         newNode.setSucc(this.succ);
         newNode.setPred(this);
-        this.pred = newNode;
+        this.succ.setPred(newNode);
         this.succ = newNode;
     }
 

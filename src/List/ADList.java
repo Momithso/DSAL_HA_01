@@ -12,6 +12,7 @@ import java.nio.file.StandardOpenOption;
 public class ADList<K,D> {
     
     protected ListNode<K,D> head;
+    private int operationCounter = 0;
 
     /**
      * Creates a doubly linked list
@@ -68,7 +69,9 @@ public class ADList<K,D> {
     public ListNode<K,D> findNode(K key) {
         ListNode<K,D> n;
         this.head.setKey(key);
-        for (n = this.head.getSucc(); !n.getKey().equals(key); n = n.getSucc()) {}
+        for (n = this.head.getSucc(); !n.getKey().equals(key); n = n.getSucc()) {
+            this.operationCounter++;
+        }
         this.head.setKey(null);
         if (n == this.head) return null;
         return n;
@@ -107,5 +110,15 @@ public class ADList<K,D> {
         ListNode<K,D> n;
         for (n = this.head.getSucc(); n.getKey() != null; n = n.getSucc()) res++;
         return res;
+    }
+
+    public int getCounter() {
+        return this.operationCounter;
+    }
+    public void setCounter(int operationCounter) {
+        this.operationCounter = operationCounter;
+    }
+    public void resetCounter() {
+        this.operationCounter = 0;
     }
 }
