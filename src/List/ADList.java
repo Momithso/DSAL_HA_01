@@ -1,5 +1,11 @@
 package List;
 
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
+
 /**
  * Represents a doubly linked list
  */
@@ -71,10 +77,35 @@ public class ADList<K,D> {
     /**
      * Prints this list
      */
-    public void print() {
+    @Override
+    public String toString() {
+        String res = "";
         ListNode<K,D> n;
         for (n = this.head.getSucc(); n.getKey() != null; n = n.getSucc()) {
-            System.out.println(n.getKey() + " : " + n.getData());
+            res += n.getKey() + " : " + n.getData() + "\n";
         }
+        return res;
+    }
+
+    /**
+     * Creates a File for this list
+     * @param p
+     */
+    public void toFile(Path p) {
+        try {
+            Files.writeString(p, this.toString(), Charset.forName("UTF-8"), StandardOpenOption.CREATE);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Returns the size of this list
+     */
+    public int size() {
+        int res = 0;
+        ListNode<K,D> n;
+        for (n = this.head.getSucc(); n.getKey() != null; n = n.getSucc()) res++;
+        return res;
     }
 }
